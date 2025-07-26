@@ -39,9 +39,20 @@ function renderData(data){
     const weatherDisplay = document.querySelector('.weather');
     const img_display = document.querySelector('.image');
 
-    cityDisplay.innerText = name;
-    temperatureDisplay.innerHTML = Math.round(Number(main.temp) - 273.15) + `<span>&deg; C</span>`;
-    humidityDisplay.innerText = "Humidity : " +main.humidity + "%";
-    weatherDisplay.innerText = weather[0].main;
-    img_display.src = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+    if(name && main && weather)
+        {
+        cityDisplay.innerText = name;
+        temperatureDisplay.innerHTML = Math.round(Number(main.temp) - 273.15) + `<span>&deg; C</span>`;
+        humidityDisplay.innerText = "Humidity : " +main.humidity + "%";
+        weatherDisplay.innerText = weather[0].main;
+        img_display.src = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+    }
+    else{
+        cityDisplay.innerText = "Error, enter valid City";
+        temperatureDisplay.innerHTML = `<span>&deg; C</span>`;
+        humidityDisplay.innerText = "Humidity : " + "%";
+        weatherDisplay.innerText = "";
+        img_display.src = ``;
+    }
+    
 }
