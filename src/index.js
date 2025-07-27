@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
+import api_controller from "./controller.js";
 
 
 //To use these variables edit the .env files
@@ -18,24 +19,24 @@ app.use(express.static('./public'));
 app.get("/", (req, res)=>{
     console.log("User hit");
     res.status(200).sendFile(path.resolve(__dirname, './public/index.html'));
+    res.end();
 });
 
 app.get("/api/city", async (req, res)=>{
-    console.log(req.query);
+
     if (!req.query || !req.query.city){
         res.status(404).send("<h1>Bad Request, enter a proper city</h1>");
     }
     else if(req.query.city){
         let city = req.query.city;
         let query = `?q=${city}&APPID=${process.env.API_KEY}`
-        const data = await fetch(`${process.env.API_URL + query}`);
-        const response = await data.json();
-        console.log("API_Responded......");
+        let response = await api_controller(process.env.API_URL, query);
         res.status(200).send(response);
     }
     else{
         res.status(404).send("<h1>Bad Request, enter a proper city</h1>");
     }
+    res.end();
 });
 
 //Error Handling
