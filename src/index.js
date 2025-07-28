@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
-import api_controller from "./controller.js";
+import apiController from "./controller.js";
 
 
 //To use these variables edit the .env files
@@ -9,7 +9,7 @@ import api_controller from "./controller.js";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 5001;
 
 //Middleware
 app.use(express.json());
@@ -22,22 +22,7 @@ app.get("/", (req, res)=>{
     res.end();
 });
 
-app.get("/api/city", async (req, res)=>{
-
-    if (!req.query || !req.query.city){
-        res.status(404).send("<h1>Bad Request, enter a proper city</h1>");
-    }
-    else if(req.query.city){
-        let city = req.query.city;
-        let query = `?q=${city}&APPID=${process.env.API_KEY}`
-        let response = await api_controller(process.env.API_URL, query);
-        res.status(200).send(response);
-    }
-    else{
-        res.status(404).send("<h1>Bad Request, enter a proper city</h1>");
-    }
-    res.end();
-});
+app.get("/api/city", apiController);
 
 //Error Handling
 
