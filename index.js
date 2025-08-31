@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import path from "path";
-import apiController from "./controller.js";
+import apiController from "./controller/controller.js";
 import cors from "cors";
 
 
