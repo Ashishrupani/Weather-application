@@ -13,4 +13,4 @@ The Frontend takes in user input via a textbox. The input is validated, then a G
 For more information: visit https://openweathermap.org/
 
 #Deployment..
-+ project is deployed on https://weather-application-tw6a.onrender.com/
++ project is deployed on https://weather-application-rigv.onrender.com
