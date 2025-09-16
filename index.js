@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 import apiController from "./controller/controller.js";
 import cors from "cors";
+import job from "./controller/cron.js";
 
 
 //To use these variables edit the .env files
@@ -11,6 +12,8 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5001;
+
+if (process.env.NODE_ENV === "production") job.start();
 
 //Middleware
 app.use(express.json());
